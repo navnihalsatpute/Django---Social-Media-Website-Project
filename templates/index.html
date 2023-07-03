@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Home - Instagram</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdeliver.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/f50909569e.js" crossorigin="anonymous"></script>
+	<style>
+		body {
+            background-color: black;
+            color:white;
+            margin: 0;
+            padding: 0;
+        }
+		nav ul li{
+			display: flex;
+			flex-direction: row;
+			padding-right: 15px;
+		}
+
+		i{
+			color: #ffffff;
+			padding-right: 5px;
+		}
+
+		#reg .dropdown-menu {
+			position: absolute;
+			top: 100%;
+			min-width: 10rem;
+		}
+		#feed{
+			margin-left: auto;
+			margin-right: auto;
+			width: 45%;
+			margin-top: 7%;
+			background: #1A1A1A;
+			border-radius: 5px;
+		}
+		.post {
+			max-width: 500px;
+			margin: 0 auto;
+			padding: 10px;
+		}
+	  
+		.post .header {
+			display: flex;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+	  
+		.post .header span {
+			font-weight: bold;
+		}
+	  
+		.post .image {
+			width: 100%;
+			margin-bottom: 10px;
+		}
+	  
+		.post .caption {
+			font-size: 14px;
+			margin-bottom: 10px;
+		}
+
+		@media only screen and (max-width: 1000px) and (min-width: 768px) {
+			#feed{
+				width: 60%;
+			}
+		}
+		@media only screen and (max-width: 768px) and (min-width: 650px) {
+			#feed{
+				width: 70%;
+			}
+		}
+		@media only screen and (max-width: 650px) and (min-width: 500px) {
+			#feed{
+				width: 80%;
+				margin-top: 10%;
+			}
+		}
+		@media only screen and (max-width: 500px) {
+			#feed{
+				width: 100%;
+				margin-top: 15%;
+			}
+		}
+		@media only screen and (max-width: 350px) {
+			*{
+				font-size:10px;
+			}
+		}
+
+	</style>
+  </head>
+  <body>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark px-5" style="background-image: linear-gradient(to right, #020024, #910053, #660098);" >
+		<a class="navbar-brand h1">Instagram</a>
+		<button class="navbar-toggler" data-toggle="collapse" data-target="#menu">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="menu">
+			<ul class="navbar-nav mx-auto">
+				<li class="nav-item">
+					<a href="/" class="nav-link">
+						<i class="fa-sharp fa-solid fa-house"></i>
+						Home
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/details" class="nav-link">
+						<i class="fa-solid fa-gear"></i>
+						Settings
+					</a>
+				</li>
+				<li class="nav-item dropdown" id="reg">
+					<a href="" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<i class="fa-solid fa-address-card"></i>
+						{{user.username}}
+					</a>
+					<div class="dropdown-menu">
+						<a href="/logout" class="dropdown-item">Log Out</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div id="content">
+		<div id="feed">
+			{% for element in posts reversed %}
+			<div class="post">
+				<div class="header">
+				  <span>@{{element.user}}</span>
+				</div>
+				<img src="{{element.image.url}}" alt="Post Image" class="image">
+				<div class="datetime">
+					<span>{{element.created_at}}</span>
+				</div>
+				<div class="caption">
+				  {{element.caption}}
+				</div>
+			</div><hr>
+			{% endfor %}
+		</div>
+	  </div>
+	</div>
+
+
+  </body>
+</html>
